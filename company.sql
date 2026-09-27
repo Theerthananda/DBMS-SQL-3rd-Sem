@@ -1,13 +1,17 @@
 -- ============================================================
--- COMPANY DATABASE
+-- CREATE DATABASE
+-- Create database company.
 -- ============================================================
-
+DROP DATABASE IF EXISTS company;
 CREATE DATABASE company;
-
 USE company;
 
 
+-- ============================================================
 -- CREATE EMPLOYEE TABLE
+-- Create table employee with fields ID, name, salary,
+-- designation and destination.
+-- ============================================================
 
 CREATE TABLE employee (
     ID INT PRIMARY KEY,
@@ -19,7 +23,11 @@ CREATE TABLE employee (
 );
 
 
+-- ============================================================
 -- CREATE DEPARTMENT TABLE
+-- Create table department, department number, department name,
+-- and employee ID.
+-- ============================================================
 
 CREATE TABLE department (
     DEPARTMENT_NO INT,
@@ -28,55 +36,71 @@ CREATE TABLE department (
 );
 
 
--- 1. INSERT FIVE RECORDS INTO EMPLOYEE TABLE
+-- ============================================================
+-- 1. Insert five records into the employee and department table.
+-- ============================================================
 
-INSERT INTO employee
-VALUES
-(111,'Arun Kumar',28000,'Clerk','Mandya',NULL),
-(222,'Priya Sharma',35000,'Manager','Mysore',555),
-(333,'Ravi Gowda',42000,'Software Engineer','Bangalore',555),
-(444,'Sneha Rao',38000,'Researcher','Hassan',222),
-(555,'Kiran Shetty',55000,'Manager','Bangalore',NULL);
+INSERT INTO employee VALUES
+(111, 'Arun', 28000, 'Clerk', 'Mandya', NULL),
+(222, 'Priya', 35000, 'Manager', 'Mysore', 555),
+(333, 'Ravi', 42000, 'Engineer', 'Bangalore', 555),
+(444, 'Sneha', 38000, 'Researcher', 'Bangalore', 222),
+(555, 'Kiran', 55000, 'HR Executive', 'Hassan', NULL);
 
-
--- INSERT FIVE RECORDS INTO DEPARTMENT TABLE
-
-INSERT INTO department
-VALUES
-(3,'Sales',111),
-(4,'Research',222),
-(5,'Development',333),
-(5,'Development',444),
-(6,'HR',555);
+INSERT INTO department VALUES
+(3, 'Sales', 111),
+(4, 'Research', 222),
+(5, 'Development', 333),
+(3, 'Sales', 444),
+(6, 'HR', 555);
 
 
--- 2. DISPLAY ID, NAME AND DESIGNATION
+-- ============================================================
+-- 2. Display ID, name and designation from employee table.
+-- ============================================================
 
-SELECT ID, NAME, DESIGNATION FROM employee;
-
-
--- 3. RETRIEVE ALL COLUMNS IN DIFFERENT SEQUENCE
-
-SELECT NAME, SALARY, ID, DESTINATION, DESIGNATION, SUPERVISOR_ID
+SELECT ID, NAME, DESIGNATION
 FROM employee;
 
 
--- 4. DISPLAY EMPLOYEE NAME IN ALPHABETICAL ORDER
+-- ============================================================
+-- 3. Retrieve all the columns in different sequence.
+-- ============================================================
 
-SELECT NAME FROM employee ORDER BY NAME ASC;
-
-
--- 5. SORT EMPLOYEE NAME IN DESCENDING ORDER
-
-SELECT NAME FROM employee ORDER BY NAME DESC;
+SELECT NAME, DESIGNATION, ID, DESTINATION, SALARY, SUPERVISOR_ID
+FROM employee;
 
 
--- 6. DISPLAY NAME OF EMPLOYEES WORKING AS MANAGER
+-- ============================================================
+-- 4. Display employee name in alphabetical order.
+-- ============================================================
 
-SELECT NAME FROM employee WHERE DESIGNATION = 'Manager';
+SELECT NAME
+FROM employee
+ORDER BY NAME ASC;
 
 
--- 7. EMPLOYEE NAME NOT WORKING IN DEPARTMENT NUMBER 3
+-- ============================================================
+-- 5. Sort the employee name in descending order.
+-- ============================================================
+
+SELECT NAME
+FROM employee
+ORDER BY NAME DESC;
+
+
+-- ============================================================
+-- 6. Display the name of employees who was working as manager.
+-- ============================================================
+
+SELECT NAME
+FROM employee
+WHERE DESIGNATION = 'Manager';
+
+
+-- ============================================================
+-- 7. Display employee name who not working in department number 3.
+-- ============================================================
 
 SELECT e.NAME
 FROM employee e
@@ -84,12 +108,19 @@ JOIN department d ON e.ID = d.EMPLOYEE_ID
 WHERE d.DEPARTMENT_NO <> 3;
 
 
--- 8. EMPLOYEE NAME AND SALARY WHERE SALARY > 30000
+-- ============================================================
+-- 8. Display employee name and salary whose salary is more than 30,000.
+-- ============================================================
 
-SELECT NAME, SALARY FROM employee WHERE SALARY > 30000;
+SELECT NAME, SALARY
+FROM employee
+WHERE SALARY > 30000;
 
 
--- 9. EMPLOYEE NAME AND DEPARTMENT NUMBER WORKING IN DEPARTMENT 4
+-- ============================================================
+-- 9. List employee name, department number, who are working
+-- at department number 4.
+-- ============================================================
 
 SELECT e.NAME, d.DEPARTMENT_NO
 FROM employee e
@@ -97,7 +128,10 @@ JOIN department d ON e.ID = d.EMPLOYEE_ID
 WHERE d.DEPARTMENT_NO = 4;
 
 
--- 10. EMPLOYEE NAME WITH SALARY > 20000 AND DEPARTMENT 5
+-- ============================================================
+-- 10. List all employees name with salary is greater than 20,000
+-- and working in department 5.
+-- ============================================================
 
 SELECT e.NAME
 FROM employee e
@@ -106,70 +140,103 @@ WHERE e.SALARY > 20000
 AND d.DEPARTMENT_NO = 5;
 
 
--- 11. EMPLOYEE NAME LIVING IN MANDYA OR MYSORE
+-- ============================================================
+-- 11. List employee name who are living either in Mandya or Mysore.
+-- ============================================================
 
 SELECT NAME
 FROM employee
-WHERE DESTINATION IN ('Mandya','Mysore');
+WHERE DESTINATION IN ('Mandya', 'Mysore');
 
 
--- 12. EMPLOYEE DATA NOT BELONGING TO DEPARTMENT 5 AND 6
+-- ============================================================
+-- 12. Display employee data, who does not belong to department 5 and 6.
+-- ============================================================
 
 SELECT e.*
 FROM employee e
 JOIN department d ON e.ID = d.EMPLOYEE_ID
-WHERE d.DEPARTMENT_NO NOT IN (5,6);
+WHERE d.DEPARTMENT_NO NOT IN (5, 6);
 
 
--- 13. EMPLOYEE DETAILS WITH ID 111 AND 333
+-- ============================================================
+-- 13. List employee details through IDs 111 and 333.
+-- ============================================================
 
-SELECT * FROM employee
-WHERE ID IN (111,333);
-
-
--- 14. DIFFERENT DESTINATIONS AVAILABLE
-
-SELECT DISTINCT DESTINATION FROM employee;
+SELECT *
+FROM employee
+WHERE ID IN (111, 333);
 
 
--- 15. COUNT NUMBER OF RECORDS IN EMPLOYEE TABLE
+-- ============================================================
+-- 14. List different destination available in Employee table.
+-- ============================================================
 
-SELECT COUNT(*) AS TOTAL_EMPLOYEES FROM employee;
-
-
--- 16. FIND AVERAGE SALARY
-
-SELECT AVG(SALARY) AS AVERAGE_SALARY FROM employee;
+SELECT DISTINCT DESTINATION
+FROM employee;
 
 
--- 17. FIND TOTAL SALARY
+-- ============================================================
+-- 15. Count the number of records in the employee table.
+-- ============================================================
 
-SELECT SUM(SALARY) AS TOTAL_SALARY FROM employee;
+SELECT COUNT(*) AS TOTAL_EMPLOYEES
+FROM employee;
 
 
--- 18. FIND EMPLOYEES WORKING IN SALES DEPARTMENT
+-- ============================================================
+-- 16. Find the average salary in the employee table.
+-- ============================================================
 
-SELECT e.*
+SELECT AVG(SALARY) AS AVERAGE_SALARY
+FROM employee;
+
+
+-- ============================================================
+-- 17. Find the total salary in employee table.
+-- ============================================================
+
+SELECT SUM(SALARY) AS TOTAL_SALARY
+FROM employee;
+
+
+-- ============================================================
+-- 18. Find the matching sales in employee table.
+-- ============================================================
+
+SELECT e.NAME
 FROM employee e
 JOIN department d ON e.ID = d.EMPLOYEE_ID
 WHERE d.DEPARTMENT_NAME = 'Sales';
 
 
--- 19. FIND MINIMUM SALARY
+-- ============================================================
+-- 19. Find the minimum salary in employee table.
+-- ============================================================
 
-SELECT MIN(SALARY) AS MINIMUM_SALARY FROM employee;
+SELECT MIN(SALARY) AS MINIMUM_SALARY
+FROM employee;
 
 
--- 20. ADD NEW ATTRIBUTE AND CHANGE BANGALORE TO HASSAN
+-- ============================================================
+-- 20. Add a new attribute in the table, change address
+-- Bangalore to Hassan.
+-- ============================================================
 
-ALTER TABLE employee ADD ADDRESS VARCHAR(30);
+ALTER TABLE employee
+ADD ADDRESS VARCHAR(30);
+
+UPDATE employee
+SET ADDRESS = DESTINATION;
 
 UPDATE employee
 SET ADDRESS = 'Hassan'
-WHERE DESTINATION = 'Bangalore';
+WHERE ADDRESS = 'Bangalore';
 
 
--- 21. NAME OF EMPLOYEES WORKING FOR RESEARCH DEPARTMENT
+-- ============================================================
+-- 21. Display name of all employees who work for research department.
+-- ============================================================
 
 SELECT e.NAME
 FROM employee e
@@ -177,13 +244,19 @@ JOIN department d ON e.ID = d.EMPLOYEE_ID
 WHERE d.DEPARTMENT_NAME = 'Research';
 
 
--- 22. EMPLOYEE DETAILS WITH SALARY BETWEEN 30000 AND 40000
+-- ============================================================
+-- 22. Display all employees details whose salary is in between
+-- 30,000 and 40,000.
+-- ============================================================
 
 SELECT *
 FROM employee
 WHERE SALARY BETWEEN 30000 AND 40000;
 
--- 23. No supervisor
+
+-- ============================================================
+-- 23. Display the name of the person who do not have supervisor.
+-- ============================================================
 
 SELECT NAME
 FROM employee
