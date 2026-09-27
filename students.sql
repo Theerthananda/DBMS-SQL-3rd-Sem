@@ -1,7 +1,18 @@
-DROP DATABASE IF EXISTS COLLEGE;
+-- ============================================================
+--1.Create a database named college.
+-- ============================================================
+
+DROP DATABASE IF EXISTS college;
+
 CREATE DATABASE college;
 
 USE college;
+
+
+-- ============================================================
+-- Create a table named studentsinfo with the following fields:
+-- ID, NAME, SUB1, SUB2, SUB3, SUB4, SUB5 and SUB6.
+-- ============================================================
 
 CREATE TABLE studentsinfo (
     ID INT PRIMARY KEY,
@@ -14,8 +25,12 @@ CREATE TABLE studentsinfo (
     SUB6 INT
 );
 
-INSERT INTO studentsinfo
-VALUES
+
+-- ============================================================
+-- 2. Insert 10 records into the studentsinfo table.
+-- ============================================================
+
+INSERT INTO studentsinfo VALUES
 (1, 'Rahul', 85, 90, 78, 88, 92, 81),
 (2, 'Arun', 76, 82, 91, 70, 85, 88),
 (3, 'Kiran', 90, 87, 84, 92, 79, 95),
@@ -27,7 +42,18 @@ VALUES
 (9, 'Akash', 74, 86, 71, 80, 78, 82),
 (10, 'Rohan', 89, 84, 92, 88, 86, 90);
 
+
+-- ============================================================
+-- by using the DESC command.
+-- ============================================================
+
 DESC studentsinfo;
+
+
+-- ============================================================
+-- 3. Add TOTAL and PERCENTAGE fields to the studentsinfo table
+-- and calculate the total marks and percentage of each student.
+-- ============================================================
 
 ALTER TABLE studentsinfo
 ADD TOTAL INT,
@@ -38,7 +64,16 @@ SET
     TOTAL = SUB1 + SUB2 + SUB3 + SUB4 + SUB5 + SUB6,
     PERCENTAGE = ((SUB1 + SUB2 + SUB3 + SUB4 + SUB5 + SUB6) / 600) * 100;
 
+
+
 SELECT * FROM studentsinfo;
+
+
+-- ============================================================
+-- 4. Add a RESULT field to the studentsinfo table and determine
+-- whether each student has PASSED or FAILED.
+-- A student passes only if they score 35 or more in all six subjects.
+-- ============================================================
 
 ALTER TABLE studentsinfo
 ADD RESULT VARCHAR(4);
@@ -56,32 +91,62 @@ SET RESULT =
         ELSE 'FAIL'
     END;
 
+
+-- ============================================================
+-- 5. Display all student details including the RESULT.
+-- ============================================================
+
 SELECT * FROM studentsinfo;
 
-SELECT ID, NAME, SUB1, SUB2, SUB3, SUB4, SUB5, SUB6, RESULT
-FROM studentsinfo;
+
+
+-- ============================================================
+-- 6. Display ID and name of all students.
+-- ============================================================
 
 SELECT ID, NAME
 FROM studentsinfo;
 
+
+-- ============================================================
+-- 8. Display all details of students who have PASSED.
+-- ============================================================
+
 SELECT *
 FROM studentsinfo
 WHERE RESULT = 'PASS';
+
+
+-- ============================================================
+-- 9. Display all details of students who have FAILED.
+-- ============================================================
 
 SELECT *
 FROM studentsinfo
 WHERE RESULT = 'FAIL';
 
 
+-- ============================================================
+-- 10. Count the number of students who have PASSED.
+-- ============================================================
 
 SELECT COUNT(*) AS PASS_COUNT
 FROM studentsinfo
 WHERE RESULT = 'PASS';
 
-SELECT COUNT(*) AS FAIL _COUNT
+
+-- ============================================================
+-- 11. Count the number of students who have FAILED.
+-- ============================================================
+
+SELECT COUNT(*) AS FAIL_COUNT
 FROM studentsinfo
 WHERE RESULT = 'FAIL';
 
+
+-- ============================================================
+-- 12. Display all student details whose percentage is less than 60.
+-- ============================================================
 
 SELECT *
 FROM studentsinfo
