@@ -139,7 +139,21 @@ This repository is shared for **learning, revision and peer study**. It is not a
 
 If you spot an error or a difference from your assignment sheet, please verify it before using the query.
 
+
+
 ---
 
-**Database:** MySQL  
-**Purpose:** III Semester DBMS practical learning
+## Credits & Copyright
+
+**Created by:** [Theerthananda](https://theerthananda.github.io/)
+
+**Technology:** MySQL  
+**Purpose:** III Semester DBMS Practical Learning
+
+Copyright © 2026 [Theerthananda](https://theerthananda.github.io/). All rights reserved.
+
+This repository is intended for educational purposes, SQL practice, revision, and peer learning. The queries and sample data are provided for reference and may contain errors or interpretations that differ from your college's assignment requirements. Please review, test, and verify all scripts against your original assignment questions before using or submitting them.
+
+**Use responsibly:** The author does not guarantee that every query is error-free or suitable for every academic requirement.
+
+
